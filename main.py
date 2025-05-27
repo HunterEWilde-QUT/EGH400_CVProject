@@ -2,7 +2,7 @@ import numpy as np
 import cv2 as cv
 
 # Capture the generated video
-cap = cv.VideoCapture("processed_data/GOT-10k_Test_000001.avi")
+cap = cv.VideoCapture("processed_data/TV77/BoBot_Vid_D_person.avi")
 
 # Define the tracking window
 _, frame = cap.read()
