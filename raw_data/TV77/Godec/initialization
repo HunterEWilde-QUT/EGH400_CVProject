@@ -1,0 +1,29 @@
+Initial Box			[   x,   y,   w,   h ]
+
+Standard Sequences
+
+David				[ 122,  58,  75,  97 ]
+Sylvester			[ 121,  58,  51,  50 ]
+Girl				[ 128,  46, 104, 127 ]
+Face Occlusion 1	[ 121,  71, 116, 146 ]
+Face Occlusion 2	[ 112,  50,  92, 116 ]
+Coke				[ 149,  80,  24,  40 ]
+Tiger 1				[ 116,  44,  38,  42 ]
+Tiger 2				[  16,  30,  34,  39 ]
+
+Advanced Sequences
+
+Cliff-dive 1		[ 131,  55,  82, 100 ]	
+Motocross 1			[ 111,  70, 125, 122 ]
+Skiing				[ 443, 179,  34,  27 ]
+Mountain-bike		[ 315, 182,  73,  60 ]
+Cliff-dive 2		[ 138,  67,  28,  70 ]
+Volleyball			[ 397, 370,  39, 124 ]
+Motocross 2			[ 143, 219,  87,  73 ]
+
+BHMC
+
+diving				[ 178,  53,  22,  77 ]
+gym					[ 165,  70,  26,  86 ]
+jump				[ 148,  74,  20,  54 ]
+trans				[ 218,  51, 112, 176 ]

@@ -1,0 +1,22 @@
+The sequences in this collection have been proposed by the authors of following papers:
+
+Coke, Face Occlusion 2, Tiger 1, Tiger 2:
+Boris Babenko, Ming-Hsuan Yang, and Serge Belongie
+Visual Tracking with Online Multiple Instance Learning
+in Proceedings CVPR, 2009
+
+David, Sylvester:
+David Ross, Jongwoo Lim, Ruei-Sung Lin, and Ming-Hsuan Yang
+Incremental Learning for Robust Visual Tracking
+in IJCV, 2007
+
+Face Occlusion 1
+A. Adam, E. Rivlin, and I. Shimshoni
+Robust fragments-based tracking using the integral histogram
+in Proceedings CVPR, 2006
+
+Girl
+S. Birchfield
+Elliptical head tracking using intensity gradients and color histograms
+in Proceedings CVPR, 1998
+
