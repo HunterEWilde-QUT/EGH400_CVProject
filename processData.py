@@ -1,9 +1,11 @@
 import os
 import cv2
 
+validImageFormats = (".jpg", ".jpeg", ".png")
+
 # Generate video from a series of images
 def generateVideo(imageDir, videoName):
-    images = [img for img in os.listdir(imageDir) if img.endswith((".jpg", ".jpeg", ".png"))]
+    images = [img for img in os.listdir(imageDir) if img.endswith(validImageFormats)]
     #print("Images:", images)
 
     # Set frame from the first image
@@ -38,7 +40,7 @@ def processDataset(datasetPath, hasList=False):
         try:
             for dirPath, _, _ in os.walk(datasetPath):
                 for path in dirPath.split("\n"):
-                    if any(file.lower().endswith((".jpg", ".jpeg", ".png")) for file in os.listdir(path)):
+                    if any(file.lower().endswith(validImageFormats) for file in os.listdir(path)):
                         generateVideo(path, path.split("/")[-1].replace("\\", "_"))
             print(f"All videos in {datasetPath} generated successfully!")
         except Exception as e:
