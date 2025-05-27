@@ -1,51 +1,48 @@
 import os
 import cv2
 
-got10k_path = "raw_data/GOT-10k/test/"
-tv77_path = "raw_data/TV77/"
-
 # Generate video from a series of images
-def generate_video(image_folder, video_name):
-    images = [img for img in os.listdir(image_folder) if img.endswith((".jpg", ".jpeg", ".png"))]
+def generateVideo(imageDir, videoName):
+    images = [img for img in os.listdir(imageDir) if img.endswith((".jpg", ".jpeg", ".png"))]
     #print("Images:", images)
 
     # Set frame from the first image
-    frame = cv2.imread(os.path.join(image_folder, images[0]))
+    frame = cv2.imread(os.path.join(imageDir, images[0]))
     height, width, layers = frame.shape
 
     # Video writer to create .avi file
-    destination = f"processed_data/{image_folder.split('/')[1]}/"
-    video = cv2.VideoWriter(destination + video_name + ".avi",
+    destination = f"processed_data/{imageDir.split('/')[1]}/"
+    video = cv2.VideoWriter(destination + videoName + ".avi",
                             cv2.VideoWriter_fourcc(*'DIVX'), 1, (width, height))
 
     # Appending images to video
     for image in images:
-        video.write(cv2.imread(os.path.join(image_folder, image)))
+        video.write(cv2.imread(os.path.join(imageDir, image)))
 
     # Release the video file
     video.release()
     cv2.destroyAllWindows()
-    print(f"{video_name} generated successfully!")
+    print(f"{videoName} generated successfully!")
 
-# Process all raw data into videos
-def process_data(raw_data_path, has_list=False):
-    if has_list:
+# Process all raw data in a directory into videos
+def processDataset(datasetPath, hasList=False):
+    if hasList:
         try:
-            with open(raw_data_path + "list.txt", 'r') as file:
+            with open(datasetPath + "list.txt", 'r') as file:
                 for line in file:
-                    generate_video(raw_data_path + line.strip(), line.strip())
-            print(f"All videos in {raw_data_path} generated successfully!")
+                    generateVideo(datasetPath + line.strip(), line.strip())
+            print(f"All videos in {datasetPath} generated successfully!")
         except Exception as e:
             print(f"Error reading list.txt: {e}")
     else:
         try:
-            for dirpath, dirnames, filenames in os.walk(raw_data_path):
-                for path in dirpath.split("\n"):
+            for dirPath, _, _ in os.walk(datasetPath):
+                for path in dirPath.split("\n"):
                     if any(file.lower().endswith((".jpg", ".jpeg", ".png")) for file in os.listdir(path)):
-                        generate_video(path, path.split("/")[-1].replace("\\", "_"))
-            print(f"All videos in {raw_data_path} generated successfully!")
+                        generateVideo(path, path.split("/")[-1].replace("\\", "_"))
+            print(f"All videos in {datasetPath} generated successfully!")
         except Exception as e:
             print(f"Images not found: {e}")
 
-# process_data(got10k_path, True)
-# process_data(tv77_path)
+processDataset("raw_data/GOT-10k/test/", True)
+processDataset("raw_data/TV77/")
