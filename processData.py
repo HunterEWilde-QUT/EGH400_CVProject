@@ -2,6 +2,7 @@ import os
 import cv2
 
 got10k_path = "raw_data/GOT-10k/test/"
+tv77_path = "raw_data/TV77/"
 
 # Generate video from a series of images
 def generate_video(image_folder, video_name):
@@ -13,7 +14,8 @@ def generate_video(image_folder, video_name):
     height, width, layers = frame.shape
 
     # Video writer to create .avi file
-    video = cv2.VideoWriter(f"processed_data/{video_name}.avi",
+    destination = f"processed_data/{image_folder.split('/')[1]}/"
+    video = cv2.VideoWriter(destination + video_name + ".avi",
                             cv2.VideoWriter_fourcc(*'DIVX'), 1, (width, height))
 
     # Appending images to video
@@ -26,13 +28,24 @@ def generate_video(image_folder, video_name):
     print(f"{video_name} generated successfully!")
 
 # Process all raw data into videos
-def process_data(raw_data_path):
-    try:
-        with open(raw_data_path + "list.txt", 'r') as file:
-            for line in file:
-                generate_video(raw_data_path + line.strip(), line.strip())
-        print(f"All videos in {raw_data_path} generated successfully!")
-    except Exception as e:
-        print(f"Error reading list.txt: {e}")
+def process_data(raw_data_path, has_list=False):
+    if has_list:
+        try:
+            with open(raw_data_path + "list.txt", 'r') as file:
+                for line in file:
+                    generate_video(raw_data_path + line.strip(), line.strip())
+            print(f"All videos in {raw_data_path} generated successfully!")
+        except Exception as e:
+            print(f"Error reading list.txt: {e}")
+    else:
+        try:
+            for dirpath, dirnames, filenames in os.walk(raw_data_path):
+                for path in dirpath.split("\n"):
+                    if any(file.lower().endswith((".jpg", ".jpeg", ".png")) for file in os.listdir(path)):
+                        generate_video(path, path.split("/")[-1].replace("\\", "_"))
+            print(f"All videos in {raw_data_path} generated successfully!")
+        except Exception as e:
+            print(f"Images not found: {e}")
 
-process_data(got10k_path)
+# process_data(got10k_path, True)
+# process_data(tv77_path)
