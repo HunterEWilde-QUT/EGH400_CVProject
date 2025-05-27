@@ -17,9 +17,9 @@ cv.normalize(roi_hist, roi_hist, 0, 255, cv.NORM_MINMAX)
 term_crit = (cv.TERM_CRITERIA_EPS | cv.TERM_CRITERIA_COUNT, 10, 1)
 
 # Track objects in the captured video
-while(cap.isOpened()):
+while cap.isOpened():
     ret, frame = cap.read()
-    if ret == True:
+    if ret:
         # Alter the frame's colours to aid in detection
         hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
         dst = cv.calcBackProject([hsv], [0], roi_hist, [0, 180], 1)
